@@ -32,6 +32,7 @@ ReactJS, NodeJS, ExpressJS, MongoDB
 
 [User]
 
+```
 \*\_id [ ObjectId ]
 
 \*username [ String, not null, Index ]
@@ -49,9 +50,11 @@ flights [ Array, Ref: Flight ]
 \*created [ Date ]
 
 \*updated [ Date ]
+```
 
 [Flight]
 
+```
 \*\_id [ ObjectId ]
 
 \*flight_id [ String, not null, Unique ]
@@ -75,9 +78,11 @@ actual_arrival [ Date ]
 \*created [ Date ]
 
 \*updated [ Date ]
+```
 
 [Notification]
 
+```
 \*\_id [ ObjectId ]
 
 \*notification_id [ String, not null, Unique ]
@@ -87,6 +92,7 @@ actual_arrival [ Date ]
 \*message [ String, not null ]
 
 \*timestamp [ Date, not null ]
+```
 
 ## Installation
 
@@ -114,12 +120,17 @@ $ npm run build // this will build the server code to es5 js codes and generate 
 To run this project, you will need to add the following environment variables to your .env file
 
 BACKEND:
+
 `DATABASE_URL` MongoDB Database URL
+
 `BASE_URL` Frontend URL
+
 `PORT` PORT Number of Server
+
 `TOKEN_SECRET` JWT Secret
 
-FRONTEBD:
+FRONTEND:
+
 `REACT_APP_BACKEND_URL` Backend URL
 
 ## Deployment
@@ -131,3 +142,4 @@ Hosted Link :
 https://yog-sadhana.netlify.app/
 
 Github Link :
+https://github.com/HarshTondak/Sky-Tracker
