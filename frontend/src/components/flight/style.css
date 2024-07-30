@@ -1,0 +1,68 @@
+.flight-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.flight-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #1876f2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loader-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.error-text {
+  color: red;
+  margin-top: 20px;
+}
+
+.flight-details {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
