@@ -42,7 +42,7 @@ export default function Footer() {
       </div>
       <div className="login_footer_wrap">
         <Link to="/" style={{ fontSize: "12px", marginTop: "10px" }}>
-          YOG-SADHANA © 2023
+          Sky Tracker © 2024
         </Link>
       </div>
     </footer>
