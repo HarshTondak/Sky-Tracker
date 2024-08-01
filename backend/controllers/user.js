@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Flight = require("../models/Flight");
+const Notification = require("../models/Notification");
 const { generateToken } = require("../helpers/tokens");
 const { validateUsername } = require("../helpers/validation");
 
@@ -101,21 +102,51 @@ exports.login = async (req, res) => {
   }
 };
 
-// Controller function to get flight details by flight_id
+// // Controller function to get flight details by flight_id
+// exports.getFlightById = async (req, res) => {
+//   try {
+//     const { flight_id } = req.params;
+//     fid = flight_id.replace(/-/g, " ");
+
+//     const flight = await Flight.findOne({ flight_id: fid });
+
+//     if (!flight) {
+//       return res.status(500).json({
+//         message: "Flight not found.",
+//       });
+//     }
+
+//     res.json(flight);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+// Controller function to get flight details by flight_id and fetch all notifications
 exports.getFlightById = async (req, res) => {
   try {
     const { flight_id } = req.params;
-    fid = flight_id.replace(/-/g, " ");
+    const formattedFlightId = flight_id.replace(/-/g, " "); // Format the flight_id
 
-    const flight = await Flight.findOne({ flight_id: fid });
+    // Fetch flight details
+    const flight = await Flight.findOne({ flight_id: formattedFlightId });
 
     if (!flight) {
-      return res.status(500).json({
-        message: "Flight not found.",
-      });
+      return res.status(404).json({ message: "Flight not found." });
     }
 
-    res.json(flight);
+    // Fetch notifications for the flight and sort by timestamp in descending order
+    const notifications = await Notification.find({
+      flight_id: formattedFlightId,
+    }).sort({ timestamp: -1 }); // Sort notifications by timestamp in descending order
+
+    // Combine flight details and notifications
+    const result = {
+      flight,
+      notifications,
+    };
+
+    res.json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

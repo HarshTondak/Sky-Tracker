@@ -9,6 +9,8 @@ export default function Flight() {
   const [flightId, setFlightId] = useState("");
   const [loading, setLoading] = useState(false);
   const [flightData, setFlightData] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+  const [searchPerformed, setSearchPerformed] = useState(false);
   const [error, setError] = useState("");
 
   const handleInputChange = (e) => {
@@ -20,16 +22,18 @@ export default function Flight() {
     setError("");
     const fID = flightId.trim().replace(/ /g, "-");
     const url = `${process.env.REACT_APP_BACKEND_URL}/flights/${fID}`;
-    console.log("Requesting URL:", url); // Log the full URL
+
     try {
       const { data } = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      setFlightData(data);
+      setSearchPerformed(true);
+      setFlightData(data.flight);
+      setNotifications(data.notifications);
     } catch (error) {
-      console.error("Error details:", error); // Log the full error
+      console.error("Error details:", error);
       setError(error.response?.data?.message || "An error occurred.");
     } finally {
       setLoading(false);
@@ -42,16 +46,18 @@ export default function Flight() {
         <span className="tagline">
           Your Flight details are 1 Simple Search away..
         </span>
-        <input
-          type="text"
-          placeholder="Enter Flight ID"
-          value={flightId}
-          onChange={handleInputChange}
-          className="flight-input"
-        />
-        <button onClick={handleSearch} className="search-button">
-          Search
-        </button>
+        <div className="search-area">
+          <input
+            type="text"
+            placeholder="Enter Flight ID"
+            value={flightId}
+            onChange={handleInputChange}
+            className="flight-input"
+          />
+          <button onClick={handleSearch} className="search-button">
+            Search
+          </button>
+        </div>
       </div>
 
       {loading && (
@@ -64,46 +70,66 @@ export default function Flight() {
 
       {flightData && (
         <div className="flight-details">
-          <table>
-            <thead>
-              <tr>
-                <th>Flight ID</th>
-                <th>Airline</th>
-                <th>Departure Gate</th>
-                <th>Arrival Gate</th>
-                <th>Scheduled Departure</th>
-                <th>Scheduled Arrival</th>
-                <th>Actual Departure</th>
-                <th>Actual Arrival</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{flightData.flight_id}</td>
-                <td>{flightData.airline}</td>
-                <td>{flightData.departure_gate}</td>
-                <td>{flightData.arrival_gate}</td>
-                <td>
-                  {new Date(flightData.scheduled_departure).toLocaleString()}
-                </td>
-                <td>
-                  {new Date(flightData.scheduled_arrival).toLocaleString()}
-                </td>
-                <td>
-                  {flightData.actual_departure
-                    ? new Date(flightData.actual_departure).toLocaleString()
-                    : "N/A"}
-                </td>
-                <td>
-                  {flightData.actual_arrival
-                    ? new Date(flightData.actual_arrival).toLocaleString()
-                    : "N/A"}
-                </td>
-                <td>{flightData.status}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="flight-details-row">
+            <div className="detail-box">
+              <strong>Flight ID:</strong> {flightData.flight_id}
+            </div>
+            <div className="detail-box">
+              <strong>Airline:</strong> {flightData.airline}
+            </div>
+            <div className="detail-box">
+              <strong>Departure Gate:</strong> {flightData.departure_gate}
+            </div>
+            <div className="detail-box">
+              <strong>Arrival Gate:</strong> {flightData.arrival_gate}
+            </div>
+            <div className="detail-box">
+              <strong>Status:</strong> {flightData.status}
+            </div>
+          </div>
+          <div className="flight-details-row">
+            <div className="detail-box">
+              <strong>Scheduled Departure:</strong>{" "}
+              {new Date(flightData.scheduled_departure).toLocaleString()}
+            </div>
+            <div className="detail-box">
+              <strong>Scheduled Arrival:</strong>{" "}
+              {new Date(flightData.scheduled_arrival).toLocaleString()}
+            </div>
+            <div className="detail-box">
+              <strong>Actual Departure:</strong>{" "}
+              {flightData.actual_departure
+                ? new Date(flightData.actual_departure).toLocaleString()
+                : "N/A"}
+            </div>
+            <div className="detail-box">
+              <strong>Actual Arrival:</strong>{" "}
+              {flightData.actual_arrival
+                ? new Date(flightData.actual_arrival).toLocaleString()
+                : "N/A"}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {searchPerformed && (
+        <div className="notifications-container">
+          <h2>Notifications</h2>
+          {notifications.length > 0 ? (
+            notifications.map((notification) => (
+              <div
+                key={notification.notification_id}
+                className="notification-box"
+              >
+                <p className="notification-message">{notification.message}</p>
+                <p className="notification-timestamp">
+                  {new Date(notification.timestamp).toLocaleString()}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p>No notifications available.</p>
+          )}
         </div>
       )}
     </div>

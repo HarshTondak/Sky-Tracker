@@ -1,0 +1,141 @@
+.createNotification {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification_header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.notification_header span {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form_row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.input_wrap {
+  flex: 1;
+  position: relative;
+}
+
+.input_wrap:last-child {
+  margin-right: 0;
+}
+
+.input_wrap label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.input_wrap input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.input_wrap input[type="datetime-local"] {
+  padding: 7px 20px;
+}
+
+.error_text {
+  position: absolute;
+  top: 26px;
+  color: #dc3545;
+  font-size: 12px;
+  border: 2px solid #dc3545;
+  border-radius: 10px;
+  padding: 2px 4px;
+}
+
+.messageArea {
+  width: 100%;
+  height: 100px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.character-count {
+  text-align: right;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.blue_btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.blue_btn:hover {
+  background-color: #0056b3;
+}
+
+.blue_btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error_text {
+  color: #dc3545;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.success_text {
+  color: #28a745;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .createNotification {
+    padding: 15px;
+  }
+
+  .notification_header span {
+    font-size: 20px;
+  }
+
+  .form_row {
+    flex-direction: column;
+  }
+
+  .input_wrap {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .input_wrap input {
+    font-size: 16px;
+  }
+
+  .messageArea {
+    font-size: 16px;
+  }
+}

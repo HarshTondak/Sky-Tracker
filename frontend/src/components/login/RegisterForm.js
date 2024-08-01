@@ -61,6 +61,7 @@ export default function RegisterForm({ setVisible }) {
 
   const registerSubmit = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/register`,
         {
@@ -78,7 +79,13 @@ export default function RegisterForm({ setVisible }) {
       dispatch({ type: "LOGIN", payload: rest });
       // Set user cookie
       Cookies.set("user", JSON.stringify(rest));
-      navigate("/");
+
+      setLoading(false);
+      if (data.username === "Admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       setLoading(false);
       setSuccess("");

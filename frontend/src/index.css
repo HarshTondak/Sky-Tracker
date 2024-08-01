@@ -4,11 +4,12 @@
   box-sizing: border-box;
 }
 @font-face {
-  font-family: Mulish;
-  src: url(./styles/fonts/fontss.woff2);
+  font-family: Ogg;
+  src: url(./styles/fonts/Ogg-Regular.ttf);
 }
 body {
-  font-family: Mulish, Helvetica, Arial, sans-serif;
+  font-family: Ogg;
+  font-weight: 600;
 }
 a {
   text-decoration: none;
@@ -29,10 +30,13 @@ a {
   --dark-bg-forth: #3a3b3c;
   --dark-color-primary: #242526;
   --dark-color-secondary: #b0b3b8;
-  --blue-color: #298f93;
-  --green-color: #aae3e3;
-  --new-green-color: #67dfdf;
-  --light-blue-color: #dcffff;
+  /* --blue-color: #298f93; */
+  /* --green-color: #aae3e3; */
+  /* --new-green-color: #67dfdf; */
+  --blue-color: #1876f2;
+  --green-color: #42b72a;
+  --light-blue-color: #e7f3ff;
+  /* --light-blue-color: #dcffff; */
   --border-color: #ccced2;
   --shadow-1: rgba(0, 0, 0, 0.2);
   --shadow-2: rgba(0, 0, 0, 0.1);

@@ -18,11 +18,23 @@ Solution:
 
 The Sky Tracker project is designed to offer real-time flight status updates and notifications to passengers using a modern tech stack. Built with ReactJS on the frontend and NodeJS with ExpressJS on the backend, this system integrates seamlessly with MongoDB for data storage. The system handles various aspects of flight information, including real-time status updates on delays, cancellations, and gate changes.
 
-For notifications, the project supports email notifications. This tools ensure that passengers receive timely updates about their flights.
+For notifications, the project supports email notifications, ensuring passengers receive timely updates about their flights.
+
+Admins have the privilege to:
+
+- Add new flight details, ensuring the system has up-to-date and accurate flight information.
+- Create new notifications, keeping passengers informed about any changes or updates related to their flights.
+  Whenever an admin creates a new notification, users associated with the affected flights receive updates through email, ensuring they are promptly informed about any changes.
+
+Normal Users can:
+
+- Fetch flight data, allowing them to check the status and details of their flights at any time.
+- Receive email notifications for any updates regarding their flights, such as delays, cancellations, or gate changes.
+  This setup ensures that passengers always have access to the latest information about their flights, making their travel experience smoother and more reliable.
 
 The User model tracks essential passenger details and their associated flights, while the Flight model stores comprehensive flight information. Notifications are managed through a dedicated schema, which records updates and timestamps for effective communication.
 
-The installation and deployment are streamlined, with the backend hosted on Render and the frontend on Netlify, ensuring robust and accessible user experiences. For detailed setup, environment variables must be configured correctly, and both frontend and backend components are built and run independently.
+Installation and deployment are streamlined, with the backend hosted on Render and the frontend on Netlify, ensuring robust and accessible user experiences. For detailed setup, environment variables must be configured correctly, and both frontend and backend components are built and run independently.
 
 ## Tech Stack Used:
 

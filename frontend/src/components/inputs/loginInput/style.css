@@ -31,7 +31,7 @@
 }
 .input_error {
   position: relative;
-  padding: 15px 10px;
+  padding: 10px 10px;
   background: #b94a48;
   width: 100%;
   color: #fff;
@@ -65,5 +65,5 @@
   border-bottom: 10px solid transparent;
   position: absolute;
   right: -10px;
-  top: 13px;
+  top: 10px;
 }

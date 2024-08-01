@@ -32,33 +32,42 @@ exports.addFlight = async (req, res) => {
         .json({ message: "All required fields must be provided." });
     }
 
-    // Check if the flight_id already exists
-    const existingFlight = await Flight.findOne({ flight_id });
-    if (existingFlight) {
-      return res
-        .status(400)
-        .json({ message: "Flight with this ID already exists." });
-    }
+    // Find the existing flight by flight_id and update it if it exists, otherwise create a new flight
+    const updatedFlight = await Flight.findOneAndUpdate(
+      { flight_id },
+      {
+        flight_id,
+        airline,
+        status,
+        departure_gate,
+        arrival_gate,
+        scheduled_departure,
+        scheduled_arrival,
+        actual_departure,
+        actual_arrival,
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
 
-    // Create a new flight document
-    const newFlight = new Flight({
-      flight_id,
-      airline,
-      status,
-      departure_gate,
-      arrival_gate,
-      scheduled_departure,
-      scheduled_arrival,
-      actual_departure,
-      actual_arrival,
-    });
+    // // Create a new flight document
+    // const newFlight = new Flight({
+    //   flight_id,
+    //   airline,
+    //   status,
+    //   departure_gate,
+    //   arrival_gate,
+    //   scheduled_departure,
+    //   scheduled_arrival,
+    //   actual_departure,
+    //   actual_arrival,
+    // });
 
-    // Save the flight to the database
-    await newFlight.save();
+    // // Save the flight to the database
+    // await newFlight.save();
 
     res.status(201).json({
       message: "Flight added successfully.",
-      flight: newFlight,
+      flight: updatedFlight,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -71,7 +80,7 @@ exports.createNotification = async (req, res) => {
     const { flight_id, message, timestamp } = req.body;
 
     // Validate flight_id
-    const flight = await Flight.findById(flight_id);
+    const flight = await Flight.findOne({ flight_id });
     if (!flight) {
       return res.status(404).json({ message: "Flight not found." });
     }

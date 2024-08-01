@@ -9,7 +9,7 @@ export default function NotLoggedInRoutes() {
     if (user) {
       const timeoutId = setTimeout(() => {
         // Navigate to "/" after 2000 milliseconds (2 seconds)
-        <Navigate to="/" />;
+        <Navigate to={user.username === "Admin" ? "/admin" : "/"} />;
       }, 2000);
 
       // Cleanup the timeout to avoid memory leaks

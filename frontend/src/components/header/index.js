@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import useClickOutside from "../../helpers/clickOutside";
 import UserMenu from "./userMenu";
 
-export default function Header({ page }) {
+export default function Header() {
   const { user } = useSelector((user) => ({ ...user }));
   const [showUserMenu, setShowUserMenu] = useState(false);
   const usermenu = useRef(null);
@@ -18,7 +18,6 @@ export default function Header({ page }) {
   return (
     <header>
       <div className="header_left">
-        {/* Search input field */}
         <Link to="/" className="header_logo">
           <div className="circle">
             <Logo />
@@ -27,7 +26,7 @@ export default function Header({ page }) {
       </div>
 
       <div className="header_right">
-        <span className="profile_link">SKY TRACKER</span>
+        <span className="profile_link">{user.username}</span>
 
         <div
           className={`circle_icon hover1 ${showUserMenu && "active_header"}`}
